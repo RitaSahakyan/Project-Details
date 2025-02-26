@@ -1,33 +1,23 @@
 <template>
-    <div class="gallery container">
-      <img :src="selectedImage" class="main-image" alt="Main Image" />
-      <div class="thumbnails">
-        <img 
-          v-for="(image, index) in images" 
-          :key="index" 
-          :src="image" 
-          @click="selectedImage = image" 
-          class="thumbnail" 
-          :class="{ active: selectedImage === image }"
-          alt="Thumbnail"
-        />
-      </div>
+  <div class="gallery container">
+    <img :src="$store.state.selectedImage" class="main-image" alt="Main Image" />
+    <div class="thumbnails">
+      <img 
+        v-for="(image, index) in $store.state.images" 
+        :key="index" 
+        :src="image" 
+        @click="$store.dispatch('updateSelectedImage', image)" 
+        class="thumbnail" 
+        :class="{ active: $store.state.selectedImage === image }"
+        alt="Thumbnail"
+      />
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   export default {
-    name: 'GalleryComponent',
-    data() {
-      return {
-        images: [
-          require('@/assets/min1.jpg'),
-          require('@/assets/min2.png'),
-          require('@/assets/min3.png')
-        ],
-                selectedImage: require('@/assets/min1.jpg')
-      };
-    }
+    name: 'GalleryComponent'
   };
   </script>
 
